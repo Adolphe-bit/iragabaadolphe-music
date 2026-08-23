@@ -1,245 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IRAGABA ADOLPHE MUSIC — songs, music sheets, compositions, choir resources and digital music.">
+<meta name="theme-color" content="#071a3d">
+<title>IRAGABA ADOLPHE MUSIC</title>
 
-    <title>IRAGABA ADOLPHE MUSIC</title>
+<style>
+:root{
+  --navy:#071a3d;
+  --navy2:#0d2c61;
+  --gold:#d4af37;
+  --gold2:#f3d77a;
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --line:#e6eaf1;
+  --shadow:0 14px 40px rgba(7,26,61,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+header{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(7,26,61,.96);backdrop-filter:blur(12px);
+  color:#fff;padding:14px 6%;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 5px 25px rgba(0,0,0,.16)
+}
+.logo{font-weight:800;font-size:19px;letter-spacing:.3px}
+.logo span{color:var(--gold)}
+nav{display:flex;align-items:center;gap:22px}
+nav a{font-size:14px;font-weight:600;opacity:.94}
+nav a:hover{color:var(--gold2)}
+.menu-btn{display:none;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
 
-        body {
-            background: #f5f7fb;
-            color: #172033;
-        }
+.hero{
+  min-height:82vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;color:#fff;padding:80px 20px;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(212,175,55,.22),transparent 28%),
+    radial-gradient(circle at 80% 70%,rgba(45,110,210,.35),transparent 35%),
+    linear-gradient(135deg,var(--navy),var(--navy2));
+  position:relative;overflow:hidden
+}
+.hero:after{
+  content:"♫  ♪  ♬";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:170px;color:rgba(255,255,255,.035);letter-spacing:40px;pointer-events:none
+}
+.hero-content{position:relative;z-index:1;max-width:850px}
+.badge{display:inline-block;border:1px solid rgba(243,215,122,.55);color:var(--gold2);padding:7px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:18px}
+.hero h1{font-size:clamp(38px,7vw,72px);line-height:1.05;margin-bottom:20px}
+.hero h1 span{color:var(--gold2)}
+.hero p{font-size:clamp(16px,2.2vw,21px);color:#e8edf7;max-width:720px;margin:0 auto 30px}
+.buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:8px;font-weight:800;transition:.2s}
+.button.primary{background:var(--gold);color:var(--navy)}
+.button.secondary{border:1px solid rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.06)}
+.button:hover{transform:translateY(-2px)}
 
-        header {
-            background: #071a3d;
-            color: white;
-            padding: 18px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+.section{padding:72px 6%;max-width:1250px;margin:auto}
+.section-head{text-align:center;margin-bottom:34px}
+.section-head h2{font-size:clamp(28px,4vw,40px);margin-bottom:8px}
+.section-head p{color:var(--muted)}
+.eyebrow{color:#9a7917;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:1.5px}
 
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-        }
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-bottom:25px}
+.search{flex:1;min-width:230px;position:relative}
+.search input{width:100%;padding:13px 16px 13px 42px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}
+.search input:focus{border-color:#9bb0d4;box-shadow:0 0 0 3px rgba(52,94,160,.10)}
+.search-icon{position:absolute;left:15px;top:11px}
+.filters{display:flex;gap:8px}
+.filter-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:11px 14px;cursor:pointer;font-weight:700;color:var(--text)}
+.filter-btn.active,.filter-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 22px;
-            font-size: 15px;
-        }
+.player{
+  background:linear-gradient(135deg,var(--navy),#123c78);
+  color:#fff;border-radius:18px;padding:20px;margin-bottom:32px;
+  box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center
+}
+.cover{width:76px;height:76px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#7c5c00);display:grid;place-items:center;font-size:32px;box-shadow:0 8px 25px rgba(0,0,0,.25)}
+.player-info strong{display:block;font-size:18px;margin-bottom:3px}
+.player-info small{color:#dbe4f5}
+.player-controls{grid-column:1/-1;display:flex;align-items:center;gap:12px}
+.play-btn{width:46px;height:46px;border:0;border-radius:50%;background:var(--gold);color:var(--navy);font-size:19px;cursor:pointer;font-weight:bold}
+.progress{flex:1}
+.progress input{width:100%;accent-color:var(--gold)}
+.time{font-size:12px;color:#dbe4f5;min-width:82px;text-align:right}
 
-        nav a:hover {
-            color: #d4af37;
-        }
+.songs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.song-card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  box-shadow:0 8px 28px rgba(7,26,61,.06);transition:.2s
+}
+.song-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.art{height:175px;background:linear-gradient(135deg,#071a3d,#1f5aa6);display:grid;place-items:center;color:#fff;font-size:52px;position:relative}
+.art span{position:absolute;bottom:12px;left:14px;font-size:11px;background:rgba(0,0,0,.35);padding:5px 9px;border-radius:999px}
+.song-body{padding:19px}
+.song-body h3{margin-bottom:4px}
+.song-body p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap}
+.small-btn{padding:9px 12px;border-radius:8px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;border:0;cursor:pointer}
+.small-btn.gold{background:var(--gold);color:var(--navy)}
+.empty{text-align:center;color:var(--muted);padding:35px;display:none}
 
-        .hero {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #071a3d, #123c78);
-            color: white;
-        }
+.about-grid,.service-grid,.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.info-card{background:#fff;border:1px solid var(--line);padding:28px;border-radius:16px;box-shadow:0 8px 25px rgba(7,26,61,.05)}
+.info-card .icon{font-size:30px;margin-bottom:12px}
+.info-card h3{margin-bottom:7px}
+.info-card p{color:var(--muted);font-size:14px}
 
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 18px;
-        }
+.contact-card{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:20px;padding:38px;text-align:center}
+.contact-card p{color:#dbe4f5;margin:8px auto 20px;max-width:650px}
 
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
+.login-box{max-width:520px;margin:auto;background:#fff;padding:30px;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.login-box label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}
+.login-box input{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px}
+.notice{font-size:13px;color:var(--muted);margin-top:12px}
 
-        .button {
-            display: inline-block;
-            padding: 13px 25px;
-            background: #d4af37;
-            color: #071a3d;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 6px;
-        }
+footer{background:var(--navy);color:#fff;text-align:center;padding:30px 20px}
+footer p{color:#cbd5e7;font-size:13px;margin-top:5px}
+.social{display:flex;justify-content:center;gap:12px;margin:14px 0}
+.social a{width:38px;height:38px;border:1px solid rgba(255,255,255,.25);border-radius:50%;display:grid;place-items:center}
+.social a:hover{background:var(--gold);color:var(--navy)}
 
-        .section {
-            padding: 60px 7%;
-            text-align: center;
-        }
+.back-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border:0;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:bold;cursor:pointer;display:none;z-index:900}
+.back-top.show{display:block}
 
-        .section h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-
-        .songs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 35px;
-        }
-
-        .song-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .song-card h3 {
-            margin-bottom: 12px;
-        }
-
-        .song-card p {
-            margin-bottom: 20px;
-            color: #666;
-        }
-
-        .pdf-button {
-            display: inline-block;
-            padding: 10px 18px;
-            background: #071a3d;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        footer {
-            background: #071a3d;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-
-        @media (max-width: 700px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav a {
-                margin: 0 7px;
-            }
-
-            .hero h1 {
-                font-size: 34px;
-            }
-        }
-    </style>
+@media(max-width:800px){
+  header{padding:14px 5%}
+  .menu-btn{display:block}
+  nav{display:none;position:absolute;top:64px;left:0;right:0;background:var(--navy);padding:16px 5%;flex-direction:column;align-items:flex-start;gap:15px}
+  nav.open{display:flex}
+  .hero{min-height:75vh}
+  .about-grid,.service-grid,.contact-grid{grid-template-columns:1fr}
+  .section{padding:55px 5%}
+  .player{grid-template-columns:auto 1fr}
+}
+@media(max-width:500px){
+  .logo{font-size:16px}
+  .hero h1{font-size:39px}
+  .toolbar{align-items:stretch}
+  .filters{overflow:auto}
+  .player-controls{gap:8px}
+  .time{min-width:65px}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">🎵 IRAGABA ADOLPHE MUSIC</div>
-
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#songs">Songs</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-        <a href="#login">Login</a>
-    </nav>
+  <a class="logo" href="#home">🎵 <span>IRAGABA ADOLPHE</span> MUSIC</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  <nav id="nav">
+    <a href="#home">Home</a>
+    <a href="#songs">Music</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <a href="#login">Login</a>
+  </nav>
 </header>
 
 <section class="hero" id="home">
-    <div>
-        <h1>IRAGABA ADOLPHE MUSIC</h1>
-        <p>Music Sheets • Songs • Compositions • Choir Resources</p>
-        <a href="#songs" class="button">Explore Songs</a>
+  <div class="hero-content">
+    <div class="badge">OFFICIAL MUSIC PLATFORM</div>
+    <h1>IRAGABA <span>ADOLPHE</span> MUSIC</h1>
+    <p>Songs, music sheets, compositions and choir resources — created to connect musicians, singers and music lovers.</p>
+    <div class="buttons">
+      <a href="#songs" class="button primary">🎧 Explore Music</a>
+      <a href="#contact" class="button secondary">📩 Contact Me</a>
     </div>
+  </div>
 </section>
 
 <section class="section" id="songs">
-    <h2>🎼 Latest Music Sheets</h2>
-    <p>Find, view and download music sheets.</p>
+  <div class="section-head">
+    <div class="eyebrow">Music Library</div>
+    <h2>🎼 Songs & Music Sheets</h2>
+    <p>Play your songs online and access your music sheets.</p>
+  </div>
 
-    <div class="songs">
-
-        <div class="song-card">
-            <h3>Sample Song 1</h3>
-            <p>Music Sheet PDF</p>
-
-            <a href="pdf/song1.pdf"
-               target="_blank"
-               class="pdf-button">
-                👁 View PDF
-            </a>
-
-            <a href="pdf/song1.pdf"
-               download
-               class="pdf-button">
-                ⬇ Download
-            </a>
-        </div>
-
-        <div class="song-card">
-            <h3>Sample Song 2</h3>
-            <p>Music Sheet PDF</p>
-
-            <a href="pdf/song2.pdf"
-               target="_blank"
-               class="pdf-button">
-                👁 View PDF
-            </a>
-
-            <a href="pdf/song2.pdf"
-               download
-               class="pdf-button">
-                ⬇ Download
-            </a>
-        </div>
-
+  <div class="player" aria-label="Music player">
+    <div class="cover">♫</div>
+    <div class="player-info">
+      <strong id="nowPlaying">Select a song to start</strong>
+      <small id="artistName">IRAGABA ADOLPHE MUSIC</small>
     </div>
+    <div class="player-controls">
+      <button class="play-btn" id="playBtn" aria-label="Play">▶</button>
+      <div class="progress">
+        <input id="progress" type="range" min="0" max="100" value="0" aria-label="Song progress">
+      </div>
+      <div class="time" id="time">0:00 / 0:00</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search">
+      <span class="search-icon">🔎</span>
+      <input id="search" type="search" placeholder="Search songs or music sheets...">
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="song">Songs</button>
+      <button class="filter-btn" data-filter="sheet">Sheets</button>
+    </div>
+  </div>
+
+  <div class="songs" id="songGrid">
+
+    <!--
+      TO ADD YOUR REAL MUSIC:
+      1. Create a folder named "music" in your GitHub repository.
+      2. Upload your MP3 files there.
+      3. Change the audio value below, for example:
+         audio: "music/my-song.mp3"
+      The same applies to PDF files in a folder named "pdf".
+    -->
+
+    <article class="song-card" data-type="song" data-title="Sample Song 1">
+      <div class="art">🎵<span>SONG</span></div>
+      <div class="song-body">
+        <h3>Sample Song 1</h3>
+        <p>Original song • IRAGABA ADOLPHE</p>
+        <div class="card-actions">
+          <button class="small-btn gold play-song"
+            data-title="Sample Song 1"
+            data-audio="music/song1.mp3">▶ Play</button>
+          <a class="small-btn" href="pdf/song1.pdf" target="_blank" rel="noopener">👁 Sheet</a>
+          <a class="small-btn" href="pdf/song1.pdf" download>⬇ Download</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="song-card" data-type="song" data-title="Sample Song 2">
+      <div class="art" style="background:linear-gradient(135deg,#28124f,#8c3ca8)">🎶<span>SONG</span></div>
+      <div class="song-body">
+        <h3>Sample Song 2</h3>
+        <p>Original song • IRAGABA ADOLPHE</p>
+        <div class="card-actions">
+          <button class="small-btn gold play-song"
+            data-title="Sample Song 2"
+            data-audio="music/song2.mp3">▶ Play</button>
+          <a class="small-btn" href="pdf/song2.pdf" target="_blank" rel="noopener">👁 Sheet</a>
+          <a class="small-btn" href="pdf/song2.pdf" download>⬇ Download</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="song-card" data-type="sheet" data-title="Choir Music Sheet">
+      <div class="art" style="background:linear-gradient(135deg,#123d32,#23806a)">🎼<span>MUSIC SHEET</span></div>
+      <div class="song-body">
+        <h3>Choir Music Sheet</h3>
+        <p>Choir arrangement / printable PDF</p>
+        <div class="card-actions">
+          <a class="small-btn" href="pdf/choir-sheet.pdf" target="_blank" rel="noopener">👁 View PDF</a>
+          <a class="small-btn gold" href="pdf/choir-sheet.pdf" download>⬇ Download</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+  <div class="empty" id="empty">No music was found. Try another search.</div>
 </section>
 
 <section class="section" id="about">
-    <h2>About</h2>
-    <p>
-        Welcome to the official music website of Iragaba Adolphe.
-        This platform provides music sheets, compositions and
-        useful resources for musicians and choirs.
-    </p>
+  <div class="section-head">
+    <div class="eyebrow">About the Artist</div>
+    <h2>About IRAGABA ADOLPHE</h2>
+  </div>
+  <div class="about-grid">
+    <div class="info-card">
+      <div class="icon">🎤</div>
+      <h3>Music & Composition</h3>
+      <p>A platform for original songs, compositions and creative musical work.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🎼</div>
+      <h3>Music Sheets</h3>
+      <p>Organized digital music sheets for musicians, singers and choirs.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🤝</div>
+      <h3>Collaboration</h3>
+      <p>Connect for musical projects, arrangements, performances and creative collaborations.</p>
+    </div>
+  </div>
 </section>
 
 <section class="section" id="services">
+  <div class="section-head">
+    <div class="eyebrow">What We Offer</div>
     <h2>Our Services</h2>
-    <p>
-        Music composition • Choir arrangements • Music sheets •
-        Digital music resources
-    </p>
+  </div>
+  <div class="service-grid">
+    <div class="info-card"><div class="icon">🎵</div><h3>Music Composition</h3><p>Original music and creative composition services.</p></div>
+    <div class="info-card"><div class="icon">🎼</div><h3>Choir Arrangements</h3><p>Music arrangements and resources for choir groups.</p></div>
+    <div class="info-card"><div class="icon">📚</div><h3>Digital Music Resources</h3><p>Downloadable music sheets and other digital resources.</p></div>
+  </div>
 </section>
 
 <section class="section" id="contact">
-    <h2>Contact</h2>
-    <p>For music resources and collaboration, contact us.</p>
+  <div class="contact-card">
+    <div class="eyebrow">Let's Connect</div>
+    <h2>Work With IRAGABA ADOLPHE MUSIC</h2>
+    <p>For music resources, composition, choir arrangements, performances or collaboration, get in touch.</p>
+    <!-- Replace the email below with your real email address. -->
+    <a class="button primary" href="mailto:YOUR-EMAIL@example.com">📩 Send an Email</a>
+  </div>
 </section>
 
 <section class="section" id="login">
-    <h2>Login</h2>
-    <p>Member and administrator login will be added in the next stage.</p>
+  <div class="section-head">
+    <div class="eyebrow">Members</div>
+    <h2>🔐 Member Login</h2>
+    <p>This is the front-end login area. A real secure login system requires a backend/authentication service.</p>
+  </div>
+  <div class="login-box">
+    <label for="email">Email</label>
+    <input id="email" type="email" placeholder="your@email.com">
+    <label for="password">Password</label>
+    <input id="password" type="password" placeholder="Password">
+    <button class="button primary" style="border:0;margin-top:18px;width:100%" onclick="loginNotice()">Login</button>
+    <p class="notice">Demo interface only — no password is stored by this page.</p>
+  </div>
 </section>
 
 <footer>
-    <p>© 2026 IRAGABA ADOLPHE MUSIC. All Rights Reserved.</p>
+  <div class="logo">🎵 IRAGABA ADOLPHE MUSIC</div>
+  <div class="social">
+    <!-- Replace # with your real social-media links -->
+    <a href="#" aria-label="Facebook">f</a>
+    <a href="#" aria-label="YouTube">▶</a>
+    <a href="#" aria-label="Instagram">◎</a>
+    <a href="#" aria-label="TikTok">♪</a>
+  </div>
+  <p>© 2026 IRAGABA ADOLPHE MUSIC. All Rights Reserved.</p>
+  <p>Music • Composition • Choir Resources • Digital Music</p>
 </footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const nav = document.getElementById("nav");
+menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
+nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+const nowPlaying = document.getElementById("nowPlaying");
+const artistName = document.getElementById("artistName");
+const timeBox = document.getElementById("time");
+
+function formatTime(seconds){
+  if (!Number.isFinite(seconds)) return "0:00";
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60).toString().padStart(2,"0");
+  return `${m}:${s}`;
+}
+
+document.querySelectorAll(".play-song").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const title = btn.dataset.title;
+    const source = btn.dataset.audio;
+
+    if (audio.src.endsWith(source)) {
+      if (audio.paused) audio.play().catch(() => {});
+      else audio.pause();
+    } else {
+      audio.src = source;
+      nowPlaying.textContent = title;
+      artistName.textContent = "IRAGABA ADOLPHE MUSIC";
+      audio.play().catch(() => {
+        alert("This song is not uploaded yet. Add the MP3 file to the music folder in your GitHub repository.");
+      });
+    }
+  });
+});
+
+playBtn.addEventListener("click", () => {
+  if (!audio.src) {
+    alert("Select a song first.");
+    return;
+  }
+  if (audio.paused) audio.play().catch(() => {});
+  else audio.pause();
+});
+
+audio.addEventListener("play", () => playBtn.textContent = "❚❚");
+audio.addEventListener("pause", () => playBtn.textContent = "▶");
+audio.addEventListener("loadedmetadata", () => {
+  timeBox.textContent = `0:00 / ${formatTime(audio.duration)}`;
+});
+audio.addEventListener("timeupdate", () => {
+  if (audio.duration) progress.value = (audio.currentTime / audio.duration) * 100;
+  timeBox.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+});
+progress.addEventListener("input", () => {
+  if (audio.duration) audio.currentTime = (progress.value / 100) * audio.duration;
+});
+
+const search = document.getElementById("search");
+const cards = [...document.querySelectorAll(".song-card")];
+const filterBtns = [...document.querySelectorAll(".filter-btn")];
+let currentFilter = "all";
+
+function filterSongs(){
+  const term = search.value.toLowerCase().trim();
+  let visible = 0;
+  cards.forEach(card => {
+    const matchesText = card.dataset.title.toLowerCase().includes(term);
+    const matchesFilter = currentFilter === "all" || card.dataset.type === currentFilter;
+    const show = matchesText && matchesFilter;
+    card.style.display = show ? "" : "block";
+    if (show) visible++;
+  });
+  document.getElementById("empty").style.display = visible ? "none" : "block";
+}
+search.addEventListener("input", filterSongs);
+filterBtns.forEach(btn => btn.addEventListener("click", () => {
+  filterBtns.forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  currentFilter = btn.dataset.filter;
+  filterSongs();
+}));
+
+function loginNotice(){
+  alert("The login interface is ready. To make it a real secure member system, connect it to an authentication service/backend.");
+}
+
+const backTop = document.getElementById("backTop");
+window.addEventListener("scroll", () => {
+  backTop.classList.toggle("show", window.scrollY > 500);
+});
+backTop.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+</script>
 
 </body>
 </html>
